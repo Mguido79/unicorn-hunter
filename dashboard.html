@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Global Intelligence Ecosystem</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Global Intelligence Ecosystem</h1>
+  <p>Annuity, life, and retail investment intelligence — United States and Japan</p>
+</div>
+
+<div class="tabs" role="tablist" aria-label="Dashboard sections">
+  <button type="button" id="tab-executive">Executive</button>
+  <button type="button" id="tab-markets">Markets</button>
+  <button type="button" id="tab-annuities">Annuities</button>
+  <button type="button" id="tab-life">Life</button>
+  <button type="button" id="tab-features">Features</button>
+  <button type="button" id="tab-rates">Rates</button>
+  <button type="button" id="tab-retail">Retail</button>
+  <button type="button" id="tab-risk">Risk</button>
+  <button type="button" id="tab-regulation">Regulation</button>
+  <button type="button" id="tab-filings">Filings</button>
+  <button type="button" id="tab-companies">All carriers</button>
+  <button type="button" id="tab-sentiment">Sentiment</button>
+</div>
+
+<div class="content">
+
+  <section id="executive" class="tab-content">
+    <h2>Executive Command Center</h2>
+    <p id="executive-brief" class="brief"></p>
+    <div id="executive-kpis"></div>
+    <h3 class="subhead">Major markets — live</h3>
+    <p class="live-markets-status brief">Refreshing public quotes in the browser…</p>
+    <div class="live-markets-wrap">
+      <div class="live-markets-panel">
+        <h3 class="subhead">Indexes</h3>
+        <div class="live-index-table"></div>
+      </div>
+      <div class="live-markets-panel">
+        <h3 class="subhead">Interest rates</h3>
+        <div class="live-rates-table"></div>
+      </div>
+    </div>
+    <h3 class="subhead">Top names to watch</h3>
+    <div class="market-section" data-group="executive" data-market="US">
+      <h3 class="subhead">United States</h3>
+      <div id="executive-watchlist-us"></div>
+      <h3 class="subhead">Equitable–Corebridge merger</h3>
+      <div id="executive-us-merger"></div>
+    </div>
+    <div class="market-section" data-group="executive" data-market="JP">
+      <h3 class="subhead">Japan</h3>
+      <div id="executive-watchlist-jp"></div>
+      <h3 class="subhead">Local market commentary</h3>
+      <div id="executive-jp-commentary"></div>
+    </div>
+    <h3 class="subhead">Key insurance market threats</h3>
+    <div class="market-section" data-group="executive-threats" data-market="US" id="executive-threats-us-section">
+      <h3 class="subhead">United States</h3>
+      <div id="executive-threats-us"></div>
+    </div>
+    <div class="market-section" data-group="executive-threats" data-market="JP">
+      <h3 class="subhead">Japan</h3>
+      <div id="executive-threats-jp"></div>
+    </div>
+    <h3 class="subhead">FRED market backdrop</h3>
+    <p id="fred-brief" class="brief"></p>
+    <div class="chart-wrap card">
+      <canvas id="fredChart"></canvas>
+    </div>
+    <div class="chart-wrap card">
+      <canvas id="creditSpreadChart"></canvas>
+    </div>
+    <p class="brief">FRED series:
+      <a class="filing-link" href="https://fred.stlouisfed.org/series/SP500" target="_blank" rel="noopener noreferrer">SP500</a>,
+      <a class="filing-link" href="https://fred.stlouisfed.org/series/DGS10" target="_blank" rel="noopener noreferrer">DGS10</a>,
+      <a class="filing-link" href="https://fred.stlouisfed.org/series/BAMLC0A0CM" target="_blank" rel="noopener noreferrer">BAMLC0A0CM</a>,
+      <a class="filing-link" href="https://fred.stlouisfed.org/series/BAMLH0A0HYM2" target="_blank" rel="noopener noreferrer">BAMLH0A0HYM2</a>.
+    </p>
+    <p id="source-note" class="brief"></p>
+  </section>
+
+  <section id="markets" class="tab-content hidden">
+    <h2>Major markets — live</h2>
+    <p class="live-markets-status brief">Refreshing public quotes in the browser…</p>
+    <div class="live-markets-wrap">
+      <div class="live-markets-panel">
+        <h3 class="subhead">Indexes</h3>
+        <div class="live-index-table"></div>
+      </div>
+      <div class="live-markets-panel">
+        <h3 class="subhead">Interest rates</h3>
+        <div class="live-rates-table"></div>
+      </div>
+    </div>
+    <h2>US retail annuity sales (industry)</h2>
+    <p id="markets-brief" class="brief"></p>
+    <div id="markets-kpis"></div>
+    <div class="chart-wrap card">
+      <canvas id="marketsChart"></canvas>
+    </div>
+    <p id="markets-overlay-note" class="brief"></p>
+    <h3 class="subhead">Product mix — VA, FA, FIA, RILA</h3>
+    <p class="brief">Yearly LIMRA product lines: traditional variable (VA), fixed-rate deferred (FA / MYGA), fixed indexed (FIA), and registered index-linked (RILA). SPIA, DIA, and structured settlements are excluded, so stacks do not equal industry total.
+      <a class="filing-link" href="https://www.limra.com/siteassets/newsroom/fact-tank/sales-data/2025/4q/4q-2025-annuity-sales-estimates-final.pdf" target="_blank" rel="noopener noreferrer">LIMRA 4Q 2025 estimates</a>.
+    </p>
+    <div class="chart-wrap card">
+      <canvas id="usAnnuityMixChart"></canvas>
+    </div>
+    <div class="chart-wrap card">
+      <canvas id="usAnnuityShareChart"></canvas>
+    </div>
+  </section>
+
+  <section id="annuities" class="tab-content hidden">
+    <h2>Top 15 annuity carriers</h2>
+    <p class="brief">United States ranked by 2025 year-end individual annuity sales ($B, LIMRA). Japan ranked by individual-annuity franchise (in-force and new business). Listing is the public ticker if the company or parent is listed (ticker, exchange, latest Yahoo price, currency, as-of, Yahoo/Google links); otherwise Mutual or Private. Japan currency is the product shelf (JPY / USD / AUD), not a live FX rate. Strategy counts are n/a unless a prospectus states them.</p>
+    <div class="market-toggle" data-group="annuities" role="tablist" aria-label="Annuity market">
+      <button type="button" data-market="all" class="active">All</button>
+      <button type="button" data-market="US">United States</button>
+      <button type="button" data-market="JP">Japan</button>
+    </div>
+    <div class="market-section" data-group="annuities" data-market="US">
+      <h3 class="subhead">United States</h3>
+      <div id="us-annuity-table"></div>
+    </div>
+    <div class="market-section" data-group="annuities" data-market="JP">
+      <h3 class="subhead">Japan</h3>
+      <div id="jp-annuity-table"></div>
+    </div>
+  </section>
+
+  <section id="life" class="tab-content hidden">
+    <h2>Top 15 life insurers</h2>
+    <p class="brief">United States: ordinary/individual life scale. Japan: FY2024–25 premium and franchise scale among domestic and foreign life companies. Sales volume and in-force are public-scale labels, not a live statutory extract — n/a where no free public figure was confirmed. Listing / quote shows the public ticker or listed parent (price n/a if the quote fetch fails).</p>
+    <div class="market-toggle" data-group="life" role="tablist" aria-label="Life market">
+      <button type="button" data-market="all" class="active">All</button>
+      <button type="button" data-market="US">United States</button>
+      <button type="button" data-market="JP">Japan</button>
+    </div>
+    <div class="market-section" data-group="life" data-market="US">
+      <h3 class="subhead">United States</h3>
+      <div id="us-life-table"></div>
+    </div>
+    <div class="market-section" data-group="life" data-market="JP">
+      <h3 class="subhead">Japan</h3>
+      <div id="jp-life-table"></div>
+    </div>
+  </section>
+
+  <section id="features" class="tab-content hidden">
+    <h2>Unique product features by carrier</h2>
+    <p class="brief">Distinctive life and annuity features for each top-15 name. United States and Japan stay in separate tables, and life is never mixed with annuity. Links go to the carrier’s product page or a confirmed SEC prospectus.</p>
+    <div class="market-toggle" data-group="features" role="tablist" aria-label="Features market">
+      <button type="button" data-market="all" class="active">All</button>
+      <button type="button" data-market="US">United States</button>
+      <button type="button" data-market="JP">Japan</button>
+    </div>
+    <div class="market-section" data-group="features" data-market="US">
+      <h3 class="subhead">United States — life</h3>
+      <p class="brief">Ordinary/individual life writers. Feature is the product or channel that sets the carrier apart, not a generic taxonomy.</p>
+      <div id="features-us-life"></div>
+      <h3 class="subhead">United States — annuity</h3>
+      <p class="brief">2025 top individual-annuity writers. FIA, MYGA, VA, and RILA rows stay in this table only.</p>
+      <div id="features-us-annuity"></div>
+    </div>
+    <div class="market-section" data-group="features" data-market="JP">
+      <h3 class="subhead">Japan — life</h3>
+      <p class="brief">Domestic and foreign life franchises. Cancer, COLI, participating, and planner models are called out per carrier.</p>
+      <div id="features-jp-life"></div>
+      <h3 class="subhead">Japan — annuity</h3>
+      <p class="brief">Individual-annuity books only. Bank-sold VA, FX single-premium, and participating yen annuities are not mixed with life rows.</p>
+      <div id="features-jp-annuity"></div>
+    </div>
+  </section>
+
+  <section id="rates" class="tab-content hidden">
+    <h2>Crediting rates and living benefits</h2>
+    <p id="rates-brief" class="brief"></p>
+    <div class="market-toggle" data-group="rates" role="tablist" aria-label="Rates market">
+      <button type="button" data-market="all" class="active">All</button>
+      <button type="button" data-market="US">United States</button>
+      <button type="button" data-market="JP">Japan</button>
+    </div>
+    <div class="market-section" data-group="rates" data-market="US">
+      <h3 class="subhead">United States — FA/MYGA 3/5/7, FIA caps/par, VA M&amp;E, RILA buffer/cap, GLWB/GMIB</h3>
+      <div id="rates-us"></div>
+    </div>
+    <div class="market-section" data-group="rates" data-market="JP">
+      <h3 class="subhead">Japan — yen and FX annuity crediting</h3>
+      <div id="rates-jp"></div>
+    </div>
+  </section>
+
+  <section id="retail" class="tab-content hidden">
+    <h2>Retail investment trends</h2>
+    <div class="market-toggle" data-group="retail" role="tablist" aria-label="Retail market">
+      <button type="button" data-market="all" class="active">All</button>
+      <button type="button" data-market="US">United States</button>
+      <button type="button" data-market="JP">Japan</button>
+    </div>
+    <div class="market-section" data-group="retail" data-market="US">
+      <h3 class="subhead">United States</h3>
+      <div id="retail-us-kpis"></div>
+      <div id="retail-us"></div>
+    </div>
+    <div class="market-section" data-group="retail" data-market="JP">
+      <h3 class="subhead">Japan</h3>
+      <div id="retail-jp-kpis"></div>
+      <p class="brief">BOJ Flow of Funds (household financial assets): <a class="filing-link" href="https://www.boj.or.jp/en/statistics/sj/index.htm" target="_blank" rel="noopener noreferrer">boj.or.jp statistics</a>. New NISA: <a class="filing-link" href="https://www.fsa.go.jp/policy/nisa2/about/nisa2024/index.html" target="_blank" rel="noopener noreferrer">FSA 2024 program</a>.</p>
+      <div id="retail-jp"></div>
+    </div>
+  </section>
+
+  <section id="risk" class="tab-content hidden">
+    <h2>Risk Command Center</h2>
+    <div id="risk-content"></div>
+    <div class="chart-wrap card">
+      <canvas id="riskChart"></canvas>
+    </div>
+    <div class="market-toggle" data-group="risk" role="tablist" aria-label="Risk market">
+      <button type="button" data-market="all" class="active">All</button>
+      <button type="button" data-market="US">United States</button>
+      <button type="button" data-market="JP">Japan</button>
+    </div>
+    <div class="market-section" data-group="risk" data-market="US">
+      <h3 class="subhead">United States</h3>
+      <div class="table-scroll">
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Issue</th>
+              <th>Owner</th>
+              <th>Severity</th>
+              <th>Score</th>
+              <th>Justification</th>
+            </tr>
+          </thead>
+          <tbody id="risk-table-us"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="market-section" data-group="risk" data-market="JP">
+      <h3 class="subhead">Japan</h3>
+      <div class="table-scroll">
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Issue</th>
+              <th>Owner</th>
+              <th>Severity</th>
+              <th>Score</th>
+              <th>Justification</th>
+            </tr>
+          </thead>
+          <tbody id="risk-table-jp"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="regulation" class="tab-content hidden">
+    <h2>Regulatory Intelligence</h2>
+    <p id="regulation-summary" class="brief"></p>
+    <div class="market-toggle" data-group="regulation" role="tablist" aria-label="Regulation market">
+      <button type="button" data-market="all" class="active">All</button>
+      <button type="button" data-market="US">United States</button>
+      <button type="button" data-market="JP">Japan</button>
+    </div>
+    <div class="market-section" data-group="regulation" data-market="US">
+      <h3 class="subhead">United States — insurance</h3>
+      <p class="brief">NAIC and state insurance rules on annuity suitability, illustrations, and solvency / reinsurance.</p>
+      <div id="regulatory-us-insurance"></div>
+      <h3 class="subhead">United States — retail investing</h3>
+      <p class="brief">SEC and DOL advice standards that sit on top of insurance product sales and IRA rollovers.</p>
+      <div id="regulatory-us-retail"></div>
+    </div>
+    <div class="market-section" data-group="regulation" data-market="JP">
+      <h3 class="subhead">Japan — insurance</h3>
+      <p class="brief">FSA solvency and insurance-conduct rules (ESR, FX annuity sales, bank-window products).</p>
+      <div id="regulatory-jp-insurance"></div>
+      <h3 class="subhead">Japan — retail investing</h3>
+      <p class="brief">FSA household-investment rules around New NISA, suitability, and customer-oriented business conduct.</p>
+      <div id="regulatory-jp-retail"></div>
+    </div>
+    <div class="market-section" data-group="regulation" data-market="Global">
+      <h3 class="subhead">Global / cross-border</h3>
+      <p class="brief">Standards that apply to internationally active groups in both the United States and Japan.</p>
+      <div id="regulatory-global"></div>
+    </div>
+  </section>
+
+  <section id="filings" class="tab-content hidden">
+    <h2>Pending filings — US life and annuity</h2>
+    <p id="filings-brief" class="brief"></p>
+    <div id="filings-kpis"></div>
+    <p id="filings-serff-note" class="brief"></p>
+    <p class="brief">North Carolina public SFA (life/annuity rate and form filings):
+      <a class="filing-link" href="https://filingaccess.serff.com/sfa/home/NC" target="_blank" rel="noopener noreferrer">filingaccess.serff.com/sfa/home/NC</a>.
+      Interactive search only — no SERFF tracking numbers are listed here.
+    </p>
+    <div class="filters-row">
+      <div class="market-toggle" id="filings-status-filter" role="tablist" aria-label="Filing status">
+        <button type="button" data-status="all" class="active">All</button>
+        <button type="button" data-status="pending">Pending</button>
+        <button type="button" data-status="effective">Effective</button>
+      </div>
+      <div class="market-toggle" id="filings-jurisdiction-filter" role="tablist" aria-label="Filing jurisdiction">
+        <button type="button" data-jurisdiction="all" class="active">All sources</button>
+        <button type="button" data-jurisdiction="EDGAR">SEC EDGAR</button>
+        <button type="button" data-jurisdiction="SERFF">SERFF / state</button>
+      </div>
+      <input id="filings-search" type="search" placeholder="Search company, product, or form">
+    </div>
+    <div class="table-scroll">
+      <table class="filings-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Product / type</th>
+            <th>Filing type</th>
+            <th>Form</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Jurisdiction</th>
+            <th>Summary</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="filings-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="companies" class="tab-content hidden">
+    <h2>Carrier universe</h2>
+    <p class="brief">Every top-15 US and Japan life and annuity name. If the company or parent is listed: ticker, exchange, latest Yahoo price, currency, as-of, and Yahoo/Google Finance links. Mutuals and privates without a listed parent stay Mutual or Private. Subsidiaries still show the listed-parent quote (Athene/APO, Global Atlantic/KKR, Protective/8750.T, Allianz Life/ALV, Aflac Japan/AFL, Sony Life/8729.T, Kampo/7181.T, and the rest). Prices are not invented — n/a if the quote fetch fails.</p>
+    <div class="filters-row">
+      <div class="market-toggle" data-group="companies" role="tablist" aria-label="Carrier market">
+        <button type="button" data-market="all" class="active">All</button>
+        <button type="button" data-market="US">United States</button>
+        <button type="button" data-market="JP">Japan</button>
+      </div>
+      <input id="company-search" type="search" placeholder="Search carriers, markets, or products">
+    </div>
+    <div class="market-section" data-group="companies" data-market="US">
+      <h3 class="subhead">United States</h3>
+      <div id="company-us"></div>
+    </div>
+    <div class="market-section" data-group="companies" data-market="JP">
+      <h3 class="subhead">Japan</h3>
+      <div id="company-jp"></div>
+    </div>
+  </section>
+
+  <section id="sentiment" class="tab-content hidden">
+    <h2>Voice of customer — public commentary</h2>
+    <p id="sentiment-brief" class="brief"></p>
+    <div id="sentiment-kpis"></div>
+    <p id="sentiment-method" class="brief"></p>
+    <p id="sentiment-ratings-method" class="brief"></p>
+    <h3 class="subhead">Public VOC scores</h3>
+    <div class="table-scroll">
+      <table class="rank-table" id="sentiment-score-table"></table>
+    </div>
+    <h3 class="subhead">Financial-strength ratings matrix</h3>
+    <div class="table-scroll">
+      <table class="rank-table filings-table" id="sentiment-ratings-table"></table>
+    </div>
+    <div class="filters-row">
+      <div class="market-toggle" data-group="sentiment" role="tablist" aria-label="Sentiment market">
+        <button type="button" data-market="all" class="active">All</button>
+        <button type="button" data-market="US">United States</button>
+        <button type="button" data-market="JP">Japan</button>
+      </div>
+      <input id="sentiment-search" type="search" placeholder="Search carrier, theme, or product">
+    </div>
+    <div class="market-section" data-group="sentiment" data-market="US">
+      <h3 class="subhead">United States</h3>
+      <div id="sentiment-us"></div>
+    </div>
+    <div class="market-section" data-group="sentiment" data-market="JP">
+      <h3 class="subhead">Japan</h3>
+      <div id="sentiment-jp"></div>
+    </div>
+    <h3 class="subhead">Complaint boards and X</h3>
+    <p id="sentiment-boards" class="brief"></p>
+  </section>
+
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
