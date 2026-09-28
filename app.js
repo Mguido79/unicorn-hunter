@@ -431,7 +431,7 @@ const filingsPending = filingsRows.filter((row) => row.status.toLowerCase() === 
 fillGrid("filings-kpis", [
   card("Filings listed", String(filingsRows.length), `As of ${filingsMeta.asOf || "—"}`),
   card("SEC EDGAR", String(filingsEdgar.length), "Confirmed accession numbers only"),
-  card("SERFF / state", String(filingsSerff.length), "None confirmed — login-gated"),
+  card("SERFF / state", String(filingsSerff.length), "Iowa SFA chosen — no public tracking numbers returned"),
   card("Still pending", String(filingsPending.length), "N-4 / 485APOS not yet effective")
 ]);
 
@@ -480,11 +480,11 @@ function renderFilings() {
       <td><span class="badge ${filingStatusClass(row.status)}">${row.status}</span></td>
       <td>${row.jurisdiction}</td>
       <td>${row.summary}</td>
-      <td><a class="filing-link" href="${row.url}" target="_blank" rel="noopener noreferrer">EDGAR</a><div class="meta">${row.accession || ""}</div></td>
+      <td><a class="filing-link" href="${row.url}" target="_blank" rel="noopener noreferrer">${/serff|state|iiprc/i.test(row.jurisdiction) ? "SERFF" : "EDGAR"}</a><div class="meta">${row.accession || ""}</div></td>
     </tr>`
         )
         .join("")
-    : `<tr><td colspan="9">No filings match these filters. SERFF company-level forms are not listed because public search is login-gated.</td></tr>`;
+    : `<tr><td colspan="9">No filings match these filters. Iowa / TX / NC / OH public SFA did not return confirmed life or annuity tracking numbers.</td></tr>`;
 }
 
 function wireFilingsFilters(rootId, attr) {

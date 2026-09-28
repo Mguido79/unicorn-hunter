@@ -4,7 +4,7 @@ const dashboardData = {
     "US life: indicative top-15 by ordinary/individual life scale (premiums and in-force) from AM Best / NAIC-style public rankings, 2024–2025. Precise statutory $ sales and in-force are n/a unless a free public figure was confirmed.",
     "Japan life and annuities: FY2024–FY2025 disclosures and Life Insurance Association of Japan / company results; annuity order uses individual-annuity in-force and new-business mix. Product currency is the shelf (JPY/USD/AUD), not a live FX quote.",
     "Retail: ICI, ETF flow reports, Japan FSA New NISA, and Bank of Japan Flow of Funds household financial assets (https://www.boj.or.jp/en/statistics/sj/index.htm).",
-    "Filings: SEC EDGAR company submissions and browse-edgar for 2025–2026 Forms N-4, N-6, 485BPOS, 485APOS, and 497. Accession numbers are taken from data.sec.gov / Archives; unconfirmed items are omitted. NAIC SERFF industry login is gated. North Carolina life/annuity forms are public via SERFF Filing Access (filingaccess.serff.com/sfa/home/NC) — interactive only; no SERFF tracking numbers are invented.",
+    "Filings: SEC EDGAR company submissions and browse-edgar for 2025–2026 Forms N-4, N-6, 485BPOS, 485APOS, and 497. Accession numbers are taken from data.sec.gov / Archives; unconfirmed items are omitted. Public SERFF directory used: https://www.thecomply.ai/serff-filing-access (Google unwrap). Iowa was the chosen public SFA (https://filingaccess.serff.com/sfa/home/IA and https://portals.naic.org/serff-filing-access?state=IA). Legacy SFA for IA/TX/NC/OH returned 403; the modern portal says those states have not transitioned. Interstate Compact SFA (https://portals.naic.org/serff-filing-access?state=IC) is live but returned no life/annuity rows after Accept. NC DOI Life & Health Filing Search is temporarily down. No SERFF tracking numbers are invented.",
     "Features: carrier product pages and confirmed SEC prospectuses for distinctive life and annuity designs (FIA, MYGA, VA, RILA, cancer, COLI, FX annuity). Four lists stay separate: US life, US annuity, Japan life, Japan annuity.",
     "Japan insurance market threats: FSA ESR monitoring (August 2026), FSA foreign-currency insurance sales monitoring, Japan Post Insurance IR, Life Insurance Association of Japan statistics, Cabinet Office aging reports, FSA New NISA, and JGB-yield coverage.",
     "US insurance market threats: NAIC annuity and reinsurance topics, SEC retail-annuity disclosure, DOL/EBSA advice standards, and Federal Reserve Financial Stability Report themes (private credit, rate, and liquidity).",
@@ -1285,11 +1285,11 @@ const dashboardData = {
   },
 
   filingsMeta: {
-    asOf: "2026-09-25",
+    asOf: "2026-09-26",
     brief:
-      "Registered US life and annuity pipeline from SEC EDGAR (2025–2026). Rows are limited to filings whose accession number, form, and date were confirmed on sec.gov. MYGA and unregistered FIA/life forms sit in SERFF; those systems are login-gated, so this tab is EDGAR-heavy.",
+      "Registered US life and annuity pipeline from SEC EDGAR (2025–2026), merged with any confirmed public SERFF life/annuity rows. EDGAR rows are limited to filings whose accession number, form, and date were confirmed on sec.gov. Iowa was the chosen public SFA for unregistered life/annuity forms; that search returned no tracking-number rows, so this tab stays EDGAR-only.",
     serffNote:
-      "SERFF: industry SERFF (login.serff.com) needs a company/regulator account. Public SERFF Filing Access is state-by-state and interactive — not bulk-scraped here. North Carolina life and annuity rate/form filings are public on NC SFA (https://filingaccess.serff.com/sfa/home/NC) and via NCDOI Life & Health Filing Search; no company-level SERFF tracking numbers are listed because none were confirmed without using that interactive search. IIPRC compact approvals also sit on SFA. NY DFS requires life/annuity forms via SERFF (Reg. 195) but does not publish a company-level pending list."
+      "SERFF scrape 26 Sep 2026: destination after the Google redirect is https://www.thecomply.ai/serff-filing-access (state SFA directory). Chosen state: Iowa. Tried https://filingaccess.serff.com/sfa/home/IA (also TX, NC, OH) — AWS 403, no result rows. Modern portal https://portals.naic.org/serff-filing-access?state=IA says Iowa/Texas/North Carolina/Ohio have not transitioned. Interstate Compact SFA (https://portals.naic.org/serff-filing-access?state=IC) is the only live public search; after Begin Search + Accept it returned “Your search was not successful.” NC DOI Life & Health Filing Search is temporarily down. Zero confirmed SERFF tracking numbers added — none invented."
   },
 
   filings: [
